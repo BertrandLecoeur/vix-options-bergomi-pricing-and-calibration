@@ -2,53 +2,53 @@
 
 Pricing and calibration of VIX options under Bergomi forward variance models.
 
-This project was developed as a Master's thesis in Quantitative Finance and focuses on the pricing of VIX derivatives using forward variance curve models introduced by Lorenzo Bergomi.
-
----
-
 ## Project Overview
 
-The objective is to model, price and calibrate VIX options using:
+This project investigates the pricing and calibration of VIX options using forward variance models introduced by Lorenzo Bergomi.
 
-- Bergomi One-Factor Model
-- Exponential Mixture Bergomi Model
-- Monte Carlo Simulation
-- Implied Volatility Extraction
-- Market Smile Calibration
+The objective is to:
 
-The project investigates the ability of forward variance models to reproduce the observed positive skew of VIX implied volatility smiles.
+- Simulate forward variance dynamics
+- Price VIX futures and options
+- Compute implied volatilities
+- Reproduce VIX volatility smiles
+- Calibrate model parameters to market data
 
 ---
 
 ## Mathematical Framework
 
-The forward variance process is modeled as:
+### Bergomi One-Factor Model
 
-\[
-d\xi_t^T = \xi_t^T \phi(T-t)dW_t
-\]
+The forward variance follows:
 
-with
+dξ(t,T) = ξ(t,T) × φ(T−t) × dW(t)
 
-\[
-\phi(\tau)=\omega e^{-k\tau}
-\]
+where
 
-for the classical Bergomi model.
+φ(τ) = ω × exp(−kτ)
 
-The extension considered in this work introduces a mixture of exponentials:
+Parameters:
 
-\[
-\xi_t^T =
-\xi_0^T
-\Big[
-(1-\gamma)G_1
-+
-\gamma G_2
-\Big]
-\]
+- ω : volatility of variance
+- k : mean reversion speed
+- 1/k : characteristic time scale
 
-allowing the model to generate significantly steeper VIX volatility smiles.
+---
+
+### Exponential Mixture Extension
+
+To better reproduce observed VIX smiles, the model is extended using a mixture of exponentials:
+
+ξ(t,T) = ξ(0,T) × [(1−γ)G₁ + γG₂]
+
+where:
+
+- G₁ and G₂ are lognormal factors
+- γ controls the weight of each factor
+- ω₁ and ω₂ represent two different volatility scales
+
+This extension generates significantly steeper positive skew, closer to market observations.
 
 ---
 
@@ -56,16 +56,17 @@ allowing the model to generate significantly steeper VIX volatility smiles.
 
 ### Market Data Processing
 
-- VIX option market data import
+- VIX option data import
 - Bid/Ask filtering
 - Mid-price computation
-- Forward VIX extraction
+- VIX forward extraction
 
 ### Monte Carlo Pricing
 
-- Simulation of forward variance dynamics
+- Forward variance simulation
 - VIX futures pricing
-- European call and put pricing
+- European Call pricing
+- European Put pricing
 
 ### Implied Volatility
 
@@ -75,53 +76,39 @@ allowing the model to generate significantly steeper VIX volatility smiles.
 
 ### Calibration
 
-- One maturity calibration
+- Single maturity calibration
 - Multi-maturity calibration
 - Least-squares optimization
 
 ### Visualization
 
-- Market vs model smiles
+- Market vs Model smiles
 - Calibration diagnostics
 - Parameter sensitivity analysis
 
 ---
 
-## Repository Structure
-
-```text
-├── data/
-│   ├── VIX market quotes
-│   └── implied volatility datasets
-│
-├── models/
-│   ├── bergomi_1f.py
-│   ├── bergomi_mixture.py
-│   └── black_model.py
-│
-├── calibration/
-│   ├── objective_function.py
-│   ├── optimizer.py
-│   └── calibration_results.py
-│
-├── plots/
-│   ├── smiles
-│   ├── surfaces
-│   └── calibration_figures
-│
-├── report/
-│   └── thesis.pdf
-│
-└── README.md
-```
-
----
-
 ## Results
 
-The classical one-factor Bergomi model reproduces the overall level of VIX volatility but generates smiles that are too flat compared with market observations.
+### One-Factor Bergomi
 
-The exponential mixture extension significantly improves the fit by introducing multiple volatility scales and capturing the pronounced positive skew observed in VIX option markets.
+Advantages:
+
+- Simple implementation
+- Fast simulation
+- Consistent forward variance dynamics
+
+Limitations:
+
+- Produces VIX smiles that are too flat
+
+### Exponential Mixture Model
+
+Advantages:
+
+- Better fit to market smiles
+- Captures positive skew
+- More realistic volatility dynamics
 
 ---
 
@@ -137,11 +124,10 @@ The exponential mixture extension significantly improves the fit by introducing 
 
 ## References
 
-- Bergomi, L. (2005) *Smile Dynamics II*
-- Bergomi, L. (2008) *Smile Dynamics III*
-- Bergomi, L. (2016) *Stochastic Volatility Modeling*
-- Gatheral & Jacquier (2014) *Arbitrage-Free SVI Volatility Surfaces*
-- Horvath, Jacquier & Tankov (2018) *Volatility Options in Rough Volatility Models*
+- Bergomi (2005) — Smile Dynamics II
+- Bergomi (2008) — Smile Dynamics III
+- Bergomi (2016) — Stochastic Volatility Modeling
+- Gatheral & Jacquier (2014) — Arbitrage-Free SVI Volatility Surfaces
 
 ---
 
@@ -149,14 +135,15 @@ The exponential mixture extension significantly improves the fit by introducing 
 
 **Lucas Last**
 
-Engineering Student in Quantitative Finance  
-CY Tech (Mathematics, Modeling & Finance)
+Engineering Student in Quantitative Finance — CY Tech
 
 Future Master in Finance (MiF) — emlyon business school
 
-Interested in:
+Interests:
+
 - Quantitative Research
 - Derivatives Pricing
 - Volatility Modeling
-- Trading & Structuring
+- Trading
+- Structuring
 - Asset Management

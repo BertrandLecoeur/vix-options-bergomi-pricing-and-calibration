@@ -133,11 +133,11 @@ Advantages:
 
 ## Author
 
-**Lucas Last**
+**Bertrand Lecoeur**
 
 Engineering Student in Quantitative Finance — CY Tech
 
-Future Master in Finance (MiF) — emlyon business school
+Master in Finance (MiF) — emlyon business school
 
 Interests:
 
